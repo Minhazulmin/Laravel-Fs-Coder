@@ -65,7 +65,7 @@ class FscoderController extends Controller {
             // Create the folder if it does not exist
             if ( !File::exists( $newFolderPath ) ) {
                 File::makeDirectory( $newFolderPath, 0755, true );
-                return redirect()->route( 'folders.index' )->with( 'fscoder-success', 'Folder created successfully.' );
+                return redirect()->with( 'success', 'Folder created successfully.' );
             }
 
             return redirect()->back()->with( 'error', 'Folder already exists.' );
