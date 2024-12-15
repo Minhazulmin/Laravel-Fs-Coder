@@ -26,11 +26,5 @@
         }
     ],
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/minhazulmin/fscoder"
-        }
-    ]
+    "prefer-stable": true
 }
