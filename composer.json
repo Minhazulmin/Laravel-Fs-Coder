@@ -1,0 +1,27 @@
+{
+    "name": "minhazulmin/fscoder",
+    "description": "Create a folder,file and code on laravel project.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Minhazulmin\\Fscoder\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Minhazulmin\\Fscoder\\FscoderServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "minhazulmin",
+            "email": "minhazul234@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+    
+}
