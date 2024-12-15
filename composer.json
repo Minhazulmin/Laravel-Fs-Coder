@@ -22,6 +22,10 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "prefer-stable": true,
+   "require": {
+        "minhazulmin/fscoder": "1.0.0-beta"
+    }
+    
     
 }
