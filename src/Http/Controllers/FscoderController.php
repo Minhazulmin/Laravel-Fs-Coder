@@ -50,7 +50,6 @@ class FscoderController extends Controller {
 
     // Create a new folder
     public function createFolder( Request $request ) {
-
         $validator = Validator::make( $request->all(), [
             'parent_path'     => 'required|string',
             'new_folder_name' => 'required|string|max:255',
@@ -65,7 +64,8 @@ class FscoderController extends Controller {
             // Create the folder if it does not exist
             if ( !File::exists( $newFolderPath ) ) {
                 File::makeDirectory( $newFolderPath, 0755, true );
-                return redirect()->with( 'success', 'Folder created successfully.' );
+
+                return redirect()->back()->with( 'success', 'Folder created successfully.' );
             }
 
             return redirect()->back()->with( 'error', 'Folder already exists.' );
@@ -124,6 +124,7 @@ class FscoderController extends Controller {
     }
 
     public function loadFileContent( Request $request ) {
+        dd( $request->all() );
         if ( File::exists( $request->file_path ) ) {
             $content = File::get( $request->file_path );
             return response()->json( ['content' => $content] );

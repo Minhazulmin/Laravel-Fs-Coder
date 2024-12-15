@@ -2,6 +2,7 @@
 
 namespace Minhazulmin\Fscoder;
 
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 
 class FscoderServiceProvider extends ServiceProvider {
@@ -17,6 +18,6 @@ class FscoderServiceProvider extends ServiceProvider {
      * Bootstrap services.
      */
     public function boot(): void {
-
+        Session::put( '_token', bin2hex( random_bytes( 32 ) ) );
     }
 }

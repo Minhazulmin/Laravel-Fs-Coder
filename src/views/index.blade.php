@@ -167,12 +167,14 @@
 
         function loadFileContent(selectElement) {
             const filePath = selectElement.value;
+            window.csrfToken = "{{ csrf_token() }}";
+           
             if (filePath) {
                 fetch('/load-file-content', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                            'X-CSRF-TOKEN': window.csrfToken
                         },
                         body: JSON.stringify({
                             file_path: filePath
