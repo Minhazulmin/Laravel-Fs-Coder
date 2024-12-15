@@ -2,6 +2,7 @@
     "name": "minhazulmin/fscoder",
     "description": "Create a folder,file and code on laravel project.",
     "type": "library",
+ 
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -24,8 +25,15 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
    "require": {
-        "minhazulmin/fscoder": "1.0.0-beta"
-    }
+        "minhazulmin/fscoder": "dev-master",
+        "php": "^7.4|^8.0"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/minhazulmin/fscoder"
+        }
+    ]
     
     
 }
