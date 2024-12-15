@@ -3,8 +3,8 @@
     "description": "Create a folder,file and code on laravel project.",
     "type": "library",
     "require": {
-        "minhazulmin/fscoder": "dev-master",
-        "php": "^7.4|^8.0"
+        "minhazulmin/fscoder": "dev-main",
+        "php": "8.2"
     },
     "license": "MIT",
     "autoload": {
