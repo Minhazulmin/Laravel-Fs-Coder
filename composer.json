@@ -3,7 +3,7 @@
     "description": "Create a folder,file and code on laravel project.",
     "type": "library",
     "require": {
-        "minhazulmin/fscoder": "master",
+        "minhazulmin/fscoder": "dev-master",
         "php": "^7.4|^8.0"
     },
     "license": "MIT",
