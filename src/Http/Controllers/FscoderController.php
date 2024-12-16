@@ -7,7 +7,14 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class FscoderController extends Controller {
-    // Method to get all folders and files and return tree structure
+
+    /**
+     * Method to get all folders and files and return tree structure
+     *
+     * @param $path
+     * @param $prefix
+     * @param $isLast = false
+     **/
     private function getAllFoldersAndFilesTree( $path, $prefix = '', $isLast = false ) {
         $items       = [];
         $directories = File::directories( $path ); // Get all folders
@@ -40,15 +47,25 @@ class FscoderController extends Controller {
         return $items;
     }
 
-    // Display the folder structure and files in the UI
+    /**
+     * Display the folder structure and files in the UI
+     *
+     * @return void
+     **/
     public function index() {
 
         $rootPath = base_path(); // Root path to start scanning
         $items    = $this->getAllFoldersAndFilesTree( $rootPath ); // Get the directory tree structure
+
         return view( 'fsCoderView::index', compact( 'items' ) );
+
     }
 
-    // Create a new folder
+    /**
+     * Create a new folder
+     *
+     * @return void
+     **/
     public function createFolder( Request $request ) {
         $validator = Validator::make( $request->all(), [
             'parent_path'     => 'required|string',
@@ -72,7 +89,11 @@ class FscoderController extends Controller {
         }
     }
 
-    // Create a new file
+    /**
+     * Create a new file
+     *
+     * @return void
+     **/
     public function createFile( Request $request ) {
 
         $validator = Validator::make( $request->all(), [
@@ -98,7 +119,11 @@ class FscoderController extends Controller {
 
     }
 
-    // Edit an existing file
+    /**
+     * Edit an existing file
+     *
+     * @return void
+     **/
     public function editFile( Request $request ) {
 
         $validator = Validator::make( $request->all(), [
@@ -123,13 +148,25 @@ class FscoderController extends Controller {
 
     }
 
+    /**
+     * Load File Content in the UI
+     *
+     * @return string
+     **/
     public function loadFileContent( Request $request ) {
-        dd( $request->all() );
-        if ( File::exists( $request->file_path ) ) {
-            $content = File::get( $request->file_path );
-            return response()->json( ['content' => $content] );
+
+        $hashedAppName = hash( 'sha256', config( 'app.name' ) );
+        if ( $hashedAppName === $request->appName ) {
+
+            if ( File::exists( $request->file_path ) ) {
+                $content = File::get( $request->file_path );
+                return response()->json( ['content' => $content] );
+            }
+            return response()->json( ['error' => 'File not found'], 404 );
+
+        } else {
+            return response()->json( ['error' => 'App name not match'], 404 );
         }
 
-        return response()->json( ['error' => 'File not found'], 404 );
     }
 }

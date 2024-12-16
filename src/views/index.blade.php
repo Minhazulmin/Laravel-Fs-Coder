@@ -10,10 +10,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="">
 
     <div class="container mx-auto my-10">
-        <h1 class="text-3xl font-bold text-center mb-8">Folder & File Management</h1>
+        <h1 class="text-3xl font-bold text-center mb-8 font-extrabold">Folder & File Management</h1>
 
         @if (session('success'))
             <div id="success-alert"
@@ -35,23 +35,23 @@
         @endif
 
         <!-- Nav tabs for different functionalities -->
-        <ul class="flex border-b mb-6" id="folderFileTabs" role="tablist">
+        <ul class="flex border-b mb-6 shadow-md" id="folderFileTabs" role="tablist">
             <li class="mr-1">
-                <a class="inline-block py-2 px-4 text-blue-600 border-b-2 border-blue-600" id="create-folder-tab"
-                    href="#create-folder" role="tab">Create Folder</a>
+                <a class="inline-block py-2 px-4 text-blue-600 border-b-2 border-blue-600 uppercase " id="create-folder-tab"
+                    href="#create-folder " role="tab">Create Folder</a>
             </li>
             <li class="mr-1">
-                <a class="inline-block py-2 px-4 text-gray-600 hover:text-blue-600" id="create-file-tab"
+                <a class="inline-block py-2 px-4 border-b-2 uppercase " id="create-file-tab"
                     href="#create-file" role="tab">Create File</a>
             </li>
             <li>
-                <a class="inline-block py-2 px-4 text-gray-600 hover:text-blue-600" id="edit-file-tab" href="#edit-file"
+                <a class="inline-block py-2 px-4 border-b-2 uppercase " id="edit-file-tab" href="#edit-file"
                     role="tab">Edit File</a>
             </li>
         </ul>
 
         <!-- Tab content -->
-        <div class="tab-content" id="folderFileTabsContent">
+        <div class="tab-content shadow-md p-6 bg-white rounded-lg" id="folderFileTabsContent">
             <!-- Create Folder Tab -->
             <div class="tab-pane active" id="create-folder" role="tabpanel">
                 <h4 class="text-xl font-semibold mb-4">Create New Folder</h4>
@@ -142,6 +142,7 @@
         </div>
     </div>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script>
         // Tab functionality
         document.querySelectorAll("[id$='-tab']").forEach(tab => {
@@ -165,36 +166,35 @@
             }
         }
 
-        function loadFileContent(selectElement) {
-            const filePath = selectElement.value;
-            window.csrfToken = "{{ csrf_token() }}";
-           
-            if (filePath) {
-                fetch('/load-file-content', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': window.csrfToken
-                        },
-                        body: JSON.stringify({
-                            file_path: filePath
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.content) {
-                            document.getElementById('file_content_edit').value = data.content;
-                        } else {
-                            document.getElementById('file_content_edit').value = '';
-                            alert('Failed to load file content.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('An error occurred while loading the file content.');
-                    });
-            }
+       function loadFileContent(selectElement) {
+        const filePath = selectElement.value;
+        const csrfToken = "{{ csrf_token() }}";
+        const hashedAppName = "{{ hash('sha256', config('app.name')) }}";
+
+        if (filePath) {
+           $.ajax({
+                url: '/load-file-content',
+                method: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                contentType: 'application/json',
+                data: { file_path: filePath, appName:hashedAppName }, // Correct way to send query parameters
+                success: function(data) {
+                    if (data.content) {
+                        $('#file_content_edit').val(data.content);
+                    } else {
+                        $('#file_content_edit').val('');
+                        alert('Failed to load file content.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('An error occurred while loading the file content.');
+                }
+            });
         }
+    }
     </script>
 
 </body>
