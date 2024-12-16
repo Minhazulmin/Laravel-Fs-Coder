@@ -58,7 +58,6 @@ class FscoderController extends Controller {
         $items    = $this->getAllFoldersAndFilesTree( $rootPath ); // Get the directory tree structure
 
         return view( 'fsCoderView::index', compact( 'items' ) );
-
     }
 
     /**
