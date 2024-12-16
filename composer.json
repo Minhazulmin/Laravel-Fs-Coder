@@ -2,7 +2,7 @@
     "name": "minhazulmin/fscoder",
     "description": "Create a folder,file and code on laravel project.",
     "type": "library",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "require": {
         "php": "^7.3 || ^8.0"
     },
