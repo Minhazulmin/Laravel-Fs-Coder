@@ -7,7 +7,7 @@ A Laravel package that simplifies file and folder management by providing functi
 
 ## Installation
 
-Install my-project with npm
+Install your project using below command
 
 ```bash
   composer require minhazulmin/fscoder
@@ -18,9 +18,9 @@ Install my-project with npm
   http://127.0.0.1:8000/fscoder
 ```
 
-You will see the design
+You will see the below design in your screen
 
 ## Screenshots
 
-![App Screenshot](https://i.postimg.cc/mrn5SXhM/fscoder.png)
+![App Screenshot](https://i.postimg.cc/NFLj58pp/fscoder.png)
 
