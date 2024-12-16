@@ -22,5 +22,5 @@ You will see the design
 
 ## Screenshots
 
-![App Screenshot](https://i.postimg.cc/mrn5SXhM/fscoder.png)
+![App Screenshot](https://i.postimg.cc/NFLj58pp/fscoder.png)
 
